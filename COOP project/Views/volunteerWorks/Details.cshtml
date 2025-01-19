@@ -1,0 +1,67 @@
+﻿@model COOP_project.Models.volunteerWork
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>volunteerWork</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.workName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.workName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.endDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.endDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Building)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Building.buildingName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Major)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Major.majorName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdGuid">Edit</a> |
+    <a asp-action="Index">Back to List</a>|
+    <a asp-controller="Users" asp-action="adminPage">Back to Admin Dashboard</a>
+</div>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<COOP_project.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Work)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isSigned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isRejected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isAccepted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isDone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Work.workName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isSigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isRejected)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isAccepted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isDone)
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdGuid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdGuid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdGuid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Users" asp-action="adminPage">Back to Admin Dashboard</a>
+</div>

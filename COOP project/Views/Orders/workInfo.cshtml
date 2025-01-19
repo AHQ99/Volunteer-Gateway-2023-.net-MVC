@@ -1,0 +1,37 @@
+﻿@model COOP_project.Models.volunteerWork
+
+<body class="bg-soft-dark">
+<section class="container bg-body p-5 ">
+	<!--Work Name-->
+			<h3 class="text-success text-center">@ViewBag.succ</h3>
+			<h3 class="text-danger text-center">@ViewBag.noP </h3>
+			<h3 class="text-danger text-center">@ViewBag.signed </h3>
+			<h3 class="text-danger text-center">@ViewBag.fail</h3>
+			<h1 class="text-center">@Html.DisplayFor(model=>model.workName) </h1>
+	<hr />
+	<!--Description-->
+	<h3 class="fw-bolder text-black">Description:</h3>
+	<p>@Html.DisplayFor(model=>model.Desc)</p>
+	<hr />
+	<!--Building, Major, and Date-->
+	<p class="d-inline fw-bolder text-black font-20">Start Date:</p>
+	<div style="position:relative; top:-35px" class="fw-bolder font-20 text-black" align="right">
+		<span >Building:</span>
+	</div>
+
+	<div style="position:relative; top:-65px" class="fw-bolder font-20 text-black" align="center">
+		<span>Major:</span>
+	</div>
+
+	<p class=" fw-bolder text-black font-14">@Html.DisplayFor(model=>model.Date)</p>
+	<p style="position:relative;left:20px; top:-35px" class="p-0 fw-bolder text-black font-14" align="right">@Html.DisplayFor(model=>model.Building.buildingName)</p>
+	<p style="position:relative; top:-75px" class=" fw-bolder text-black font-14" align="center">@Html.DisplayFor(model=>model.Major.majorName)</p>
+
+	<!--Supervisor name and email-->
+	<hr />
+	<h3 class=" fw-bolder text-black">Supervisor Name: <span class=" fw-bolder text-black font-18">@Html.DisplayFor(x=>x.User.Name)</span></h3>
+	<h3 class=" fw-bolder text-black">Supervisor's Email: <span class=" fw-bolder text-black font-18">@Html.DisplayFor(x=>x.User.Email)</span></h3>
+	
+</section>
+</body>
+

@@ -1,0 +1,283 @@
+﻿@using System.Security.Claims;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Security-Policy"
+          content="frame-src 'none';">
+          
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewData["Title"] - COOP project </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+    
+    <link href="~/css/style2.css" rel="stylesheet">
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+
+    <!--Material Icon -->
+    <link rel="stylesheet" type="text/css" href="~/css/materialdesignicons.min.css" />
+
+    <!--pe-icon-7 Icon -->
+    <link rel="stylesheet" type="text/css" href="~/css/pe-icon-7-stroke.css" />
+
+    <!-- Custom  css -->
+    <link rel="stylesheet" href="~/css/style1.css">
+
+
+    <link rel="stylesheet" href="~/css/fontawesome.css">
+    <link rel="stylesheet" href="~/css/templatemo-574-mexant.css">
+    
+    <script src="~/js/config.js"></script>
+
+    <!-- Customized Indsturio Bootstrap Stylesheet -->
+    <link href="~/css/indBootStarp.min.css" rel="stylesheet">
+
+    <!-- Template Indsturio Stylesheet -->
+    <link href="~/css/indStyle.css" rel="stylesheet">
+    
+    <!-- Google Indsturio Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icon Indsturio Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Indsturio Stylesheet -->
+    <link href="~/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="myProjects/webProject/icofont/css/icofont.min.css">
+
+   <!--Animate.css for sweet alert-->
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<body>
+    
+    <header class="sticky" id="navbar-sticky">
+        @*<div class="tagline d-none d-lg-block bg-dark">
+            <div class="container">
+                <div class="float-start info-link">
+                    <ul class="list-inline mb-0">
+                       
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="me-1"></i><span></span>
+                                
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="float-end">
+                   
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>*@
+
+        @*<!-- TOP NAV -->
+        <div class="tagline" >
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <p> <i class='bx bxs-envelope'></i> info@example.com</p>
+                        <p> <i class='bx bxs-phone-call'></i> 123 456-7890</p>
+                    </div>
+                    <div class="col-auto social-icons">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-pinterest'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        <!-- BOTTOM NAV -->
+        <nav class="navbar navbar-expand-lg nav-sticky navbar-light bg-dark">
+            <div class="container">
+                <!-- LOGO -->
+                <a class="logo text-uppercase" href="~/Home/homePage">
+                    <p class="text-white">Volunteer Works</p>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto navbar-center" id="mySidenav">
+                        
+                            <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated == true && User.FindFirst(ClaimTypes.Role).Value == "Student" )
+                            {
+                                <a href="~/Home/Index" class="nav-link active text-white">voulnteer works</a>
+                            }
+                            else if (User.Identity.IsAuthenticated == false)
+                            {
+                                 <a href="~/Home/Index" class="nav-link active text-white">voulnteer works</a> 
+                            }
+
+
+                            </li>
+                        
+
+
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                var id =User.FindFirst(ClaimTypes.Hash).Value.ToString();
+
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle arrow-none text-white" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Welcome
+                                        @User.FindFirst(ClaimTypes.GivenName).Value <i class="mdi mdi-chevron-down ms-1"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        @if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value == "Admin")
+                                        {
+                                            <a class="dropdown-item" href="~/users/adminPage"><i class="bi bi-person-video"></i> Admin Page</a>
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfile" asp-route-Id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                            
+                                        }
+                                        else if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value == "Supervisor")
+                                        {
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfile" asp-route-Id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                        }
+                                        else if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value == "Student")
+                                        {
+                                            <a class="dropdown-item" asp-controller="orders" asp-action="showOrders" asp-route-Id="@id"><i class="bi bi-archive"></i> Show Orders</a>
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfileS" asp-route-id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                        }
+                                        <a class="dropdown-item" href="~/Login/logout"><i class="bi bi-power text-dark"></i> Logout</a>
+
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                 <a href="~/Login/LoginPage" class="nav-link text-white">Login</a> 
+                            }
+
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+       @* <!--Navbar Start-->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-light" id="navbar">
+            <div class="container">
+                <!-- LOGO -->
+                <a class="logo text-uppercase" href="~/Home/homePage">
+                    <img src="~/images/logo-dark.png" alt="" class="logo-light" height="20" />
+                    <img src="~/images/logo-dark.png" alt="" class="logo-dark" height="20" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto navbar-center" id="mySidenav">
+                        <li class="nav-item">
+                            <a href="~/" class="nav-link active">voulnteer works</a>
+                        </li>
+                        
+                            <li class="nav-item">
+                                @if(User.Identity.IsAuthenticated)
+                            {
+                                var id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle arrow-none" href="" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome 
+                                        @User.FindFirst(ClaimTypes.GivenName).Value <i class="mdi mdi-chevron-down ms-1"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        @if(User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value=="Admin")
+                                        {
+                                            <a class="dropdown-item" href="~/users/adminPage"><i class="bi bi-person-video"></i> Admin Page</a>
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfile" asp-route-id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                            
+                                        }
+                                        else if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value == "Supervisor")
+                                        {
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfile" asp-route-id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                        }
+                                        else if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.Role).Value == "Student")
+                                        {
+                                            <a class="dropdown-item" asp-controller="orders" asp-action="showOrders" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier).Value"><i class="bi bi-archive"></i> Show Orders</a>
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="showProfileS" asp-route-id="@id"><i class="bi bi-person"></i> Show Profile</a>
+                                        }
+                                        <a class="dropdown-item" href="~/Login/logout"><i class="bi bi-power text-dark"></i> Logout</a>
+                                        
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="~/Login/LoginPage" class="nav-link">Login</a>
+                            }
+                            
+
+                           </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar End -->*@
+    </header>
+
+    <main class="body">
+        @RenderBody()
+    </main>
+                
+           
+
+    @*<section class="section mb-5" id="faq">
+        
+        <!-- end container -->
+    </section>*@
+   
+    <footer class="bg-dark py-5 footer text-white">
+        <div class="container">
+            <div class="row">
+               
+                
+            </div>
+            <!-- end row -->
+            
+            <!-- end row -->
+        </div>
+        <!-- container end -->
+    </footer>
+    <!-- javascript -->
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+
+    <!--Sweet Alert-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- counter js -->
+    <script src="~/js/counter.init.js"></script>
+
+    <!-- custom js -->
+    <script src="~/js/app.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

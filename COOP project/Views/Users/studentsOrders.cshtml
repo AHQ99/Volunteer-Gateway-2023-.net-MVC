@@ -1,0 +1,168 @@
+﻿@model IEnumerable<COOP_project.Models.Order>
+<body class="bg-white-0">
+    <section class="container-fluid ">
+        <script>
+
+            
+            @{
+                if (@ViewData["succ"] != null)
+                {
+
+                    <Text>
+                        $(document).ready(function () {
+                            var result = '@Html.Raw(ViewData["succ"])';
+                            Swal.fire(result, '', 'success')
+                                .then(
+                                    function () {
+                                        window.location.href = '@Url.Action("studentsOrders","Users")';
+                                    }
+                                );
+                        });
+                    </Text>
+                }
+            }
+        </script>
+        @if (Model.Count() == 0)
+        {
+            <h1 class="text-center">No one sign to voulnteer works</h1>
+        }
+        else
+        {
+            <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                            <div class="col-sm-6">
+                                <a href="~/Users/adminPage" class="btn btn-primary mb-2"><i class="bi bi-person-workspace me-1"></i> Admin Dashboard</a>
+                            </div>
+                <div class="table-responsive">
+                    
+                    @* <h3 class="text-danger text-center">@ViewBag.fail</h3>
+                <h3 class="text-success text-center">@ViewBag.succ </h3>*@
+                    <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="all" style="width: 20px;">
+                                    <div class="form-check font-16 mb-0">
+                                        <label class="form-check-label" for="productlistCheck">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th class="all">Voulnteer Work</th>
+                                <th>Building</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Student Name</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th style="width: 85px;">Action</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                        
+                                <tbody class="bg-white">
+                                    <tr>
+                                        <td>
+                                            <div class="form-check font-16 mb-0">
+                                                <label class="form-check-label" for="productlistCheck1">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5 class="m-0 d-inline-block align-middle"><a href="#" class="text-dark">@item.Work.workName</a></h5>
+                                        </td>
+                                        <td>
+                                            <span>@item.Work.Building.buildingName</span>
+                                        </td>
+                                        <td>
+                                            @item.Work.Date
+                                        </td>
+                                        <td>
+                                            @item.Work.endDate
+                                        </td>
+                                        <td>
+                                            <div>
+                                                @item.Student.name
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                        </td>
+                                        <td>
+                                            @if(item.isSigned==true)
+                                            {
+                                                <span class="badge badge-soft-primary">Signed</span>
+                                            }
+                                            else if(item.isRejected==true)
+                                            {
+                                                <span class="badge badge-soft-danger">Rejected</span>
+                                            }
+                                            else if(item.isAccepted==true)
+                                            {
+                                                <span class="badge badge-soft-success">Accepted</span>
+                                            }
+                                            else if(item.isDone==true)
+                                            {
+                                                <span class="badge badge-soft-success">Done</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline table-action m-0">
+                                                <li class="list-inline-item">
+                                                    <a asp-controller="Home" asp-action="showProfileS" asp-route-id="@item.Student.IdGuid" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                                </li>
+                                                @if(item.isDone!=true)
+                                                {
+                                                    <li class="list-inline-item">
+                                                        <form method="post" id="delForm" onsubmit="sendForm(event)" asp-action="studentsOrders" asp-route-Id="@item.IdGuid">
+                                                        @if(item.isRejected ==false  && item.isAccepted==false && item.isSigned==true)
+                                                        {
+                                                            <button style="border: none;background: none;" name="button" value="rej" class="action-icon">
+                                                                    <i class="bi bi-x"></i>
+                                                            
+                                                                </button>
+
+                                                            
+                                                                <br />
+                                                                <button style="border: none;background: none;" name="button" value="acc" class="action-icon">
+                                                                    <i class="bi bi-check-lg"></i>
+                                                                
+                                                                </button>
+                                                            
+                                                        }
+                                                        </form>
+                                                    </li>
+                                                }
+                                            
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                        
+
+                        }
+                    
+                    
+                    </table>
+
+                    @*<button style="position:relative;left:0px; top:-28px">Admin Dashboard</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+
+
+        <!--Work Name-->
+
+
+
+    </section>
+</body>
+@section Scripts{
+
+}

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<COOP_project.Models.Order>
+<body class="bg-soft-dark">
+    <section class="container-fluid ">
+        
+        @if (Model.Count() == 0)
+        {
+            <h1 class="text-center">You </h1>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                @* <h3 class="text-danger text-center">@ViewBag.fail</h3>
+                            <h3 class="text-success text-center">@ViewBag.succ </h3>*@
+                                <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="all" style="width: 20px;">
+                                                <div class="form-check font-16 mb-0">
+                                                    <label class="form-check-label" for="productlistCheck">&nbsp;</label>
+                                                </div>
+                                            </th>
+                                            <th class="all">Voulnteer Work</th>
+                                            <th>Building</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Student Name</th>
+                                            <th></th>
+                                            
+                                            <th style="width: 85px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    @{
+                                        
+                                    }
+                                    @foreach (var item in Model.Distinct())
+                                    {
+
+                                        <tbody class="bg-white">
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check font-16 mb-0">
+                                                        <label class="form-check-label" for="productlistCheck1">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h5 class="m-0 d-inline-block align-middle"><a href="#" class="text-dark">@item.Work.workName</a></h5>
+                                                </td>
+                                                <td>
+                                                    <span>@item.Work.Building.buildingName</span>
+                                                </td>
+                                                <td>
+                                                    @item.Work.Date
+                                                </td>
+                                                <td>
+                                                    @item.Work.endDate
+                                                </td>
+                                                <td>
+                                                     
+                                                     @item.Student.name
+                                                <td>
+                                                </td>
+                                                
+                                                <td>
+                                                    <ul class="list-inline table-action m-0">
+                                                        <li class="list-inline-item">
+                                                            <a asp-controller="Home" asp-action="showProfileS" asp-route-id="@item.Student.IdGuid" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+
+
+                                    }
+
+
+                                </table>
+
+                                @*<button style="position:relative;left:0px; top:-28px">Admin Dashboard</button>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+        <!--Work Name-->
+
+
+
+    </section>
+</body>
+@section Scripts{
+
+}

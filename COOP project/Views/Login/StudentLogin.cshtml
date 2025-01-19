@@ -1,0 +1,89 @@
+﻿@model COOP_project.Models.Student
+
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "StudentLogin";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+   
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+
+    <!--Material Icon -->
+    <link rel="stylesheet" type="text/css" href="~/css/materialdesignicons.min.css" />
+
+    <!--pe-icon-7 Icon -->
+    <link rel="stylesheet" type="text/css" href="~/css/pe-icon-7-stroke.css" />
+
+    <!-- Custom  css -->
+    <link rel="stylesheet" type="text/css" href="~/css/style1.css" />
+</head>
+<body class="bg-white-50">
+    <section>
+        <form asp-action="StudentLogin" method="post" class=" gradient-custom">
+            <div class="container-fluid py-2 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+
+                                <div class=" pb-4">
+
+                                    <p class="fw-bold mb-2 text-uppercase font-28 ">Login</p>
+                                    <p class="text-white-50 mb-5">Please enter your user name and password!</p>
+                                    <span class="text-danger">@ViewBag.fail</span>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label asp-for="user_Name" class="form-label"></label>
+                                        <input asp-for="user_Name" class="form-control form-control-lg" />
+
+                                    </div>
+
+                                    <div class="form-outline form-white mb-4">
+                                        <label asp-for="password" class="form-label"></label>
+                                        <input asp-for="password" class="form-control form-control-lg  " />
+
+                                    </div>
+
+                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="~/Login/ForgetPassword">Forgot password?</a></p>
+
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </section>
+</body>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+</html>

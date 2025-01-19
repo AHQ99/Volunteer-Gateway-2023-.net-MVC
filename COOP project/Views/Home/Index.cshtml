@@ -1,0 +1,165 @@
+﻿@model IEnumerable<COOP_project.Models.volunteerWork>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<body class="bg-white-0">
+<section  class="services">
+    <div class="container-fluid">
+        <div class="card ">
+            <br />
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div id="products-datatable_filter" class="dataTables_filter">
+                        <label>Search:</label>
+                        <label>
+                            <input style="width: 280px !important; min-width: 280px; max-width: 280px;" class="form-control form-control-sm" id="myInput" type="text" placeholder="Search..">
+                        </label>
+                    </div>
+                </div>
+                   
+                <div class="col-sm-12 col-md-4">
+                    <div class="dataTables_length" id="products-datatable_length">
+                        <label>Building:</label>
+                        <label>
+
+                            <select style="width: 280px !important; min-width: 280px; max-width: 280px;" class="form-control select2 select2-hidden-accessible" id="Building" type="text">
+                                <option>All</option>
+                                @{
+                                    var noDup = Model.Select(x => x.Building.buildingName).Distinct();
+                                }
+                                @foreach (var item in noDup)
+                                {
+                                    <option>@item</option>
+                                }
+
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <hr />
+
+            <div class="row">
+
+
+                <div id="div12">
+                    <div class="row m-0">
+                        
+
+                        @{var work = Model.Select(x => x.endDate).All(x=>x<DateTime.Now); 
+                        }
+
+                        @if (Model.Count() == 0 || work==true)
+                        {
+                           <div class="text-black ">
+                                <h1 class="text-center">There is No Voulntree Works</h1>
+
+                           </div>
+                        }
+                        
+                        else
+                        {
+
+                            @foreach (var item in Model)
+                            {
+
+
+                                @if (item.status == true && item.Date>DateTime.Now)
+                                {
+                                    <div class="col-lg-4 col-md-6 mb-4  align-items-stretch">
+                                        <a asp-controller="volunteerWorks" asp-action="workInfo" asp-route-id="@item.IdGuid">
+                                            <div class="icon-box">
+
+                                                <h4>@item.workName</h4>
+
+                                                <input align="center" class="text-white btn btn-success" value="Open" readonly>
+                                                <hr>
+                                                <p1>Major: @item.Major.majorName</p1>
+                                                <p>Bulding: @item.Building.buildingName</p>
+                                                <p>Start DATE: @item.Date</p>
+                                                <p>End DATE: @item.endDate</p>
+
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+
+                            }
+                            @foreach (var item in Model)
+                            {
+
+
+                                @if ((item.status == false || item.status==true || item.numOS>=0) && (item.Date < DateTime.Now && item.endDate > DateTime.Now))
+                                {
+                                    <div class="col-lg-4 col-md-6 mb-4  align-items-stretch">
+                                        
+                                            <div class="icon-box">
+
+                                                <h4>@item.workName</h4>
+
+                                                <input align="center" class="text-white btn btn-danger" value="Closed" readonly disabled>
+                                                <hr>
+                                                <p1>Major: @item.Major.majorName</p1>
+                                                <p>Bulding: @item.Building.buildingName</p>
+                                                <p>Start DATE: @item.Date</p>
+                                                <p>End DATE: @item.endDate</p>
+
+                                            </div>
+                                        
+                                    </div>
+                                }
+
+                            }
+
+                        }
+                    </div>
+                </div>
+
+
+
+
+
+
+                <script>
+                    $(document).ready(function () {
+                        $("#myInput").on("keyup", function () {
+                            var value = $(this).val().toLowerCase();
+                            $("#div12 section").filter(function () {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#Building").change(function () {
+                            var value = $(this).val().toLowerCase();
+                            
+                            if(value=="All" || value=="all")
+                            {
+                                    $("#div12 div").filter(function () {
+                                        $(this).show()
+                                    });
+                            }
+                            else
+                            {
+                                    $("#div12 div").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                            }
+                           
+                        });
+                    });
+                </script>
+            </div>
+
+        </div>
+    </div>
+</section>
+</body>
